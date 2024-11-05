@@ -126,6 +126,19 @@ class Fornecedor:
         conn.commit()
         print("Fornecedor excluído com sucesso.")
 
+    def VisualizarFornecedor():
+        cursor = conn.cursor()
+        cursor.execute("SELECT id_fornecedor, nome_fornecedor, contato_fornecedor, produtos_fornecidos FROM fornecedor;")
+        resultado = cursor.fetchall()
+        print("====================================")
+        print(">>> Visualização dos Fornecedores <<<")
+        print("====================================")
+        print("")
+        print("ID | Nome | Contato | Produtos")
+        print("------------------------------------")
+        for id_fornecedor, nome_fornecedor, contato_fornecedor, produtos_fornecidos in resultado:
+            print(f"{id_fornecedor} | {nome_fornecedor} | {contato_fornecedor} | {produtos_fornecidos}")
+
 ##########################################
 # Dados conexao com o banco mysql server #
 ##########################################
