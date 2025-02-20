@@ -15,7 +15,11 @@ public class MenuView {
         System.out.println("6 - Alterar Fornecedor");
         System.out.println("7 - Excluir Fornecedor");
         System.out.println("8 - Listar Fornecedores");
-        System.out.println("9 - Sair");
+        System.out.println("9 - Cadastrar Cliente");
+        System.out.println("10 - Alterar Cliente");
+        System.out.println("11 - Excluir Cliente");
+        System.out.println("12 - Listar Clientes");
+        System.out.println("13 - Sair");
     }
 
     public static int lerOpcao(Scanner scanner) {

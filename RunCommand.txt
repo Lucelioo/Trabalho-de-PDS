@@ -1,0 +1,2 @@
+javac -cp ".;lib/mysql-connector-j-9.1.0/mysql-connector-j-9.1.0.jar" (Get-ChildItem -Path src -Recurse -Filter "*.java").FullName
+java -cp ".;lib/mysql-connector-j-9.1.0/mysql-connector-j-9.1.0.jar;src" Main

@@ -4,6 +4,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import utils.InventoryIterator;
+import utils.ListInventoryIterator;
+
 public class ProdutoModel {
 
     // Método corrigido
@@ -33,14 +36,14 @@ public class ProdutoModel {
     }
 
     public static boolean excluirProduto(int id) {
+        String query = "DELETE FROM produtos WHERE id_produto = ?";
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement("DELETE FROM produtos WHERE id_produto = ?")) {
+             PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setInt(1, id);
-            int linhasAfetadas = stmt.executeUpdate();
-            return linhasAfetadas > 0; // Retorna true se alguma linha foi excluída
+            return stmt.executeUpdate() > 0;
         } catch (SQLException e) {
-            System.out.println("Erro ao excluir o produto: " + e.getMessage());
-            return false; // Retorna false em caso de erro
+            System.out.println("Erro ao excluir produto: " + e.getMessage());
+            return false;
         }
     }
     
@@ -62,6 +65,10 @@ public class ProdutoModel {
         }
 
         return produtos; // Retorna a lista de produtos
+    }
+
+    public static InventoryIterator<Produto> getIterator() {
+    return new ListInventoryIterator<>(listarProdutos());
     }
 
     public static class Produto {
@@ -86,7 +93,23 @@ public class ProdutoModel {
             return id + " - " + nome;
         }
     }
+
+    public static String getNomeProduto(int id) {
+        String query = "SELECT nome_produto FROM produtos WHERE id_produto = ?";
+        
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                return rs.getString("nome_produto");
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao buscar nome do produto: " + e.getMessage());
+        }
+        return null;
+    }
 }
-
-
 

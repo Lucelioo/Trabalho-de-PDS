@@ -1,23 +1,22 @@
 package controllers;
 
-import models.UserModel;
-import views.AuthView;
-
 import java.util.Scanner;
 
+import models.UserModel;
+
+
 public class AuthController {
-    public static boolean autenticarUsuario(Scanner scanner) {
-        String[] credenciais = AuthView.exibirTelaLogin(scanner);
+    public static boolean autenticarUsuario(String usuario, String senha) {
         try {
-            if (UserModel.autenticarUsuario(credenciais[0], credenciais[1])) {
-                return true;
-            } else {
-                AuthView.exibirMensagemFalhaLogin();
-                return false;
-            }
+            return UserModel.autenticarUsuario(usuario, senha);
         } catch (Exception e) {
             System.out.println("Erro ao autenticar usuário: " + e.getMessage());
             return false;
         }
+    }
+
+    public static boolean autenticarUsuario(Scanner scanner) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'autenticarUsuario'");
     }
 }

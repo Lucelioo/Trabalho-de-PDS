@@ -8,6 +8,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import utils.InventoryIterator;
+import utils.ListInventoryIterator;
+
 public class FornecedorModel {
 
     public static boolean cadastrarFornecedor(String nome, String contato, String produtos) {
@@ -87,6 +90,10 @@ public class FornecedorModel {
         }
 
         return fornecedores;
+    }
+
+    public static InventoryIterator<Fornecedor> getIterator() {
+    return new ListInventoryIterator<>(listarFornecedores());
     }
 
     // Classe Fornecedor
